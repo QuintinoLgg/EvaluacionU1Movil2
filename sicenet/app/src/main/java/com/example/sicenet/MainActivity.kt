@@ -1,9 +1,12 @@
 package com.example.sicenet
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.RequiresApi
 import com.example.sicenet.data.parsearPerfilAcademico
+import com.example.sicenet.navigation.AppNavigation
 import com.example.sicenet.network.SICENETService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -24,6 +27,7 @@ class MainActivity : ComponentActivity() {
             .create(SICENETService::class.java)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -88,7 +92,7 @@ class MainActivity : ComponentActivity() {
 
         // Configuración de Jetpack Compose
         setContent {
-            // Contenido de Jetpack Compose
+            AppNavigation()
         }
     }
 }
