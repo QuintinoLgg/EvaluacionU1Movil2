@@ -16,7 +16,7 @@ import java.net.CookieManager
 import java.net.CookiePolicy
 
 object SICENETServiceFactory {
-    private const val BASE_URL = "https://sicenet.itsur.edu.mx/ws/wsalumnos.asmx/"
+    private const val BASE_URL = "sicenet.surguanajuato.tecnm.mx/"
     // Implementación de CookieJar para manejar cookies
     private val cookieJar = object : CookieJar {
         private val cookieStore = mutableMapOf<String, MutableList<Cookie>>()

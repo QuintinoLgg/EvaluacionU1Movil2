@@ -17,15 +17,12 @@ import retrofit2.Retrofit
 import retrofit2.awaitResponse
 import retrofit2.converter.gson.GsonConverterFactory
 import android.util.Log
+import com.example.sicenet.network.SICENETServiceFactory
 
 class MainActivity : ComponentActivity() {
-    // Crear instancia de la interfaz SICENETService
+    // Usar la instancia proporcionada por SICENETServiceFactory
     private val sicenetService: SICENETService by lazy {
-        Retrofit.Builder()
-            .baseUrl("https://sicenet.itsur.edu.mx/ws/wsalumnos.asmx/")  // Reemplaza con la URL real
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(SICENETService::class.java)
+        SICENETServiceFactory.sicenetService
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -77,7 +74,6 @@ class MainActivity : ComponentActivity() {
                         // Perfil académico obtenido con éxito, manejar la respuesta según sea necesario
                         val perfilAcademicoResponseBody = perfilAcademicoResponse.body()?.string()
                         println("Respuesta de perfil académico: $perfilAcademicoResponseBody")
-                        Log.d("Tag", "Exitosa")
                     } else {
                         // Manejar respuesta de error para obtener perfil académico
                         println("Error al obtener el perfil académico: ${perfilAcademicoResponse.code()}")
@@ -85,12 +81,10 @@ class MainActivity : ComponentActivity() {
                 } else {
                     // Manejar respuesta de error
                     println("Error en la autenticación: ${response.code()}")
-                    Log.d("Tag", "Respuesta erronea")
                 }
             } catch (e: Exception) {
                 // Manejar excepciones
                 println("Error en la solicitud de autenticación: ${e.message}")
-                Log.d("Tag", "Noo hay conexion")
             }
         }
 
