@@ -16,7 +16,7 @@ import java.net.CookieManager
 import java.net.CookiePolicy
 
 object SICENETServiceFactory {
-    private const val BASE_URL = "https://tu-url-del-servicio-web/"
+    private const val BASE_URL = "https://sicenet.itsur.edu.mx/ws/wsalumnos.asmx/"
     // Implementación de CookieJar para manejar cookies
     private val cookieJar = object : CookieJar {
         private val cookieStore = mutableMapOf<String, MutableList<Cookie>>()
@@ -50,13 +50,14 @@ object SICENETServiceFactory {
 interface SICENETService {
     @Headers(
         "Content-Type: text/xml",
-        "SOAPAction: \"http://tempuri.org/getAlumnoAcademicoWithLineamiento\""
+        "SOAPAction: \"http://tempuri.org/accesoLogin\""
         //"Cookie: <Insertar cookie>"
     )
-    @POST("ws/wsalumnos.asmx")
+    @POST("accesoLogin")
     fun authenticate(@Body requestBody: RequestBody): Call<ResponseBody>
 
     @Headers("Content-Type: text/xml")
-    @POST("ws/wsalumnos.asmx")
+    @POST("accesoLogin")
     fun getPerfilAcademico(@Body requestBody: RequestBody): Call<ResponseBody>
+
 }

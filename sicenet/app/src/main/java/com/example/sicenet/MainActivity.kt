@@ -16,12 +16,13 @@ import okhttp3.RequestBody
 import retrofit2.Retrofit
 import retrofit2.awaitResponse
 import retrofit2.converter.gson.GsonConverterFactory
+import android.util.Log
 
 class MainActivity : ComponentActivity() {
     // Crear instancia de la interfaz SICENETService
     private val sicenetService: SICENETService by lazy {
         Retrofit.Builder()
-            .baseUrl("https://tu-url-del-servicio-web/")  // Reemplaza con la URL real
+            .baseUrl("https://sicenet.itsur.edu.mx/ws/wsalumnos.asmx/")  // Reemplaza con la URL real
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(SICENETService::class.java)
@@ -41,9 +42,9 @@ class MainActivity : ComponentActivity() {
                     xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
                   <soap:Body>
                     <accesoLogin xmlns="http://tempuri.org/">
-                      <strMatricula>%S</strMatricula>
-                      <strContrasenia>%S</strContrasenia>
-                      <tipoUsuario>ALUMNO or DOCENTE</tipoUsuario>
+                      <strMatricula>s20120151</strMatricula>
+                      <strContrasenia>R%e9s8=</strContrasenia>
+                      <tipoUsuario>ALUMNO</tipoUsuario>
                     </accesoLogin>
                   </soap:Body>
                 </soap:Envelope>
@@ -52,7 +53,7 @@ class MainActivity : ComponentActivity() {
                 // Convertir la cadena XML en un RequestBody
                 val requestBody = RequestBody.create("text/xml".toMediaTypeOrNull(), requestBodyString)
 
-                // Realizar la solicitud
+                // Llamada al método authenticate(), realizar peticion
                 val response = sicenetService.authenticate(requestBody).awaitResponse()
 
                 if (response.isSuccessful) {
@@ -76,6 +77,7 @@ class MainActivity : ComponentActivity() {
                         // Perfil académico obtenido con éxito, manejar la respuesta según sea necesario
                         val perfilAcademicoResponseBody = perfilAcademicoResponse.body()?.string()
                         println("Respuesta de perfil académico: $perfilAcademicoResponseBody")
+                        Log.d("Tag", "Exitosa")
                     } else {
                         // Manejar respuesta de error para obtener perfil académico
                         println("Error al obtener el perfil académico: ${perfilAcademicoResponse.code()}")
@@ -83,10 +85,12 @@ class MainActivity : ComponentActivity() {
                 } else {
                     // Manejar respuesta de error
                     println("Error en la autenticación: ${response.code()}")
+                    Log.d("Tag", "Respuesta erronea")
                 }
             } catch (e: Exception) {
                 // Manejar excepciones
                 println("Error en la solicitud de autenticación: ${e.message}")
+                Log.d("Tag", "Noo hay conexion")
             }
         }
 
