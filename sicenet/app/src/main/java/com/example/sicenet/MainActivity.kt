@@ -17,12 +17,15 @@ import retrofit2.Retrofit
 import retrofit2.awaitResponse
 import retrofit2.converter.gson.GsonConverterFactory
 import android.util.Log
-import com.example.sicenet.network.SICENETServiceFactory
 
 class MainActivity : ComponentActivity() {
-    // Usar la instancia proporcionada por SICENETServiceFactory
+    // Crear instancia de la interfaz SICENETService
     private val sicenetService: SICENETService by lazy {
-        SICENETServiceFactory.sicenetService
+        Retrofit.Builder()
+            .baseUrl("https://sicenet.itsur.edu.mx/ws/wsalumnos.asmx/")  // Reemplaza con la URL real
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(SICENETService::class.java)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
