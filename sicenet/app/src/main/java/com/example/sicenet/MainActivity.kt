@@ -42,7 +42,7 @@ class MainActivity : ComponentActivity() {
                     xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
                   <soap:Body>
                     <accesoLogin xmlns="http://tempuri.org/">
-                      <strMatricula>s20120151</strMatricula>
+                      <strMatricula>S20120151</strMatricula>
                       <strContrasenia>R%e9s8=</strContrasenia>
                       <tipoUsuario>ALUMNO</tipoUsuario>
                     </accesoLogin>
@@ -53,8 +53,11 @@ class MainActivity : ComponentActivity() {
                 // Convertir la cadena XML en un RequestBody
                 val requestBody = RequestBody.create("text/xml".toMediaTypeOrNull(), requestBodyString)
 
+                println("Valor mayor: $requestBody")
+
                 // Llamada al método authenticate(), realizar peticion
                 val response = sicenetService.authenticate(requestBody).awaitResponse()
+                println("Valor importante: $response")
 
                 if (response.isSuccessful) {
                     // Autenticación exitosa, manejar la respuesta según sea necesario

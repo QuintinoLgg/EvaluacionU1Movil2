@@ -49,15 +49,16 @@ object SICENETServiceFactory {
 
 interface SICENETService {
     @Headers(
+        "Host: sicenet.surguanajuato.tecnm.mx",
         "Content-Type: text/xml",
-        "SOAPAction: \"http://tempuri.org/accesoLogin\""
+        "Content-Length: length",
+        "SOAPAction: \"http://tempuri.org/accesoLogin\"",
         //"Cookie: <Insertar cookie>"
     )
-    @POST("accesoLogin")
+    @POST("/ws/wsalumnos.asmx?op=accesoLogin")
     fun authenticate(@Body requestBody: RequestBody): Call<ResponseBody>
 
     @Headers("Content-Type: text/xml")
-    @POST("accesoLogin")
+    @POST("ws/wsalumnos.asmx")
     fun getPerfilAcademico(@Body requestBody: RequestBody): Call<ResponseBody>
-
 }
