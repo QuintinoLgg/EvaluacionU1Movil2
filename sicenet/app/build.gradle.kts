@@ -59,10 +59,14 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
-    // XML
+    // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    // Retrofit with Scalar Converter
+    implementation("com.squareup.retrofit2:converter-scalars:2.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.3")
+    implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.okhttp3:okhttp:4.9.1")
+    implementation("com.squareup.retrofit2:converter-simplexml:2.1.0")
 
 
     testImplementation("junit:junit:4.13.2")
@@ -75,4 +79,8 @@ dependencies {
 
     //Navegacion
     implementation("androidx.navigation:navigation-compose:2.7.7")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.3.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
 }
