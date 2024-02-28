@@ -1,4 +1,4 @@
-package com.example.sicenet
+package com.example.autenticacionyconsulta
 
 import org.junit.Test
 

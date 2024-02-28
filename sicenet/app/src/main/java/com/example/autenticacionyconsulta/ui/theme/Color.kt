@@ -1,4 +1,4 @@
-package com.example.sicenet.ui.theme
+package com.example.autenticacionyconsulta.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

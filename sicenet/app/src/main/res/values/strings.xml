@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">sicenet</string>
+    <string name="app_name">AutenticacionYConsulta</string>
+    <string name="title_activity_info_student">InfoStudent</string>
+    <string name="tipoUsuario">Tipo de Usuario</string>
+    <string name="alumno">ALUMNO</string>
+    <string name="docente">DOCENTE</string>
 </resources>

@@ -13,6 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "sicenet"
+rootProject.name = "AutenticacionYConsulta"
 include(":app")
- 

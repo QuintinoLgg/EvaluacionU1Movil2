@@ -1,4 +1,4 @@
-package com.example.sicenet.ui.theme
+package com.example.autenticacionyconsulta.ui.theme
 
 import android.app.Activity
 import android.os.Build
@@ -14,8 +14,6 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
-
-
 
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
@@ -40,7 +38,7 @@ private val LightColorScheme = lightColorScheme(
 )
 
 @Composable
-fun AccesoLoginTheme(
+fun AutenticacionYConsultaTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
