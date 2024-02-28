@@ -87,10 +87,7 @@ fun loginApp(
                     modifier=Modifier.size(35.dp),
                     tint = Color(255,124,112))
                 Text(
-                    text = "Matricula o contraseña",
-                    fontSize = 14.sp,
-                    color=Color(255,158,142))
-                Text(text = "son incorrectos",
+                    text = "Datos incorrectos",
                     fontSize = 14.sp,
                     color=Color(255,158,142))
             }
