@@ -69,21 +69,8 @@ fun dataStudent(
 
     Scaffold (
         topBar = {
-
-            Row {
-                IconButton(
-                    onClick = {
-                        navController.popBackStack()
-                    },
-                    modifier = Modifier.size(50.dp)
-                ) {
-                    Icon(imageVector = Icons.Filled.ArrowBack,
-                        contentDescription = "",
-                        modifier = Modifier.size(50.dp))
-                }
-
-                MenuGlobal(navController)
-            }
+            //navController.popBackStack()
+            MenuGlobal(navController)
         },
     ){
         Column (

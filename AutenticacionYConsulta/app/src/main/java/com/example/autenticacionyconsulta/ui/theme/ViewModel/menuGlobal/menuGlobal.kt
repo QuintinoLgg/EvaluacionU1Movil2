@@ -10,6 +10,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Addchart
 import androidx.compose.material.icons.filled.Analytics
 import androidx.compose.material.icons.filled.AssuredWorkload
+import androidx.compose.material.icons.filled.ExitToApp
+import androidx.compose.material.icons.filled.Newspaper
 import androidx.compose.material.icons.filled.Note
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -40,17 +42,20 @@ fun MenuGlobal(navController: NavController){
 @Composable
 fun Botones(navController: NavController){
     val navControllerList: List<AppScreens> = listOf(
+        AppScreens.Login,
         AppScreens.Info,
         AppScreens.CargAcad
     )
     val iconList: List<ImageVector> = listOf(
+        Icons.Filled.ExitToApp,
         Icons.Filled.Person,
-        Icons.Filled.Note,
+        Icons.Filled.Newspaper,
         Icons.Filled.AssuredWorkload,
         Icons.Filled.Addchart,
         Icons.Filled.Analytics,
     )
     val DescriptionList: List<String> = listOf(
+        "Salir al login",
         "Informacion personal",
         "Carga academica",
         "Kardex",
