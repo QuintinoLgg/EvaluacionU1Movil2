@@ -7,8 +7,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.autenticacionyconsulta.ui.theme.ViewModel.cargaAcademica.cargaAcademica
+import com.example.autenticacionyconsulta.ui.theme.ViewModel.final.califFinales
+import com.example.autenticacionyconsulta.ui.theme.ViewModel.kardex.Kardex
 import com.example.autenticacionyconsulta.ui.theme.ViewModel.screenInfo.dataStudent
 import com.example.autenticacionyconsulta.ui.theme.ViewModel.screenLogin.loginApp
+import com.example.autenticacionyconsulta.ui.theme.ViewModel.unidad.califUnidades
 
 @Composable
 fun AppNavigation(){
@@ -26,8 +29,23 @@ fun AppNavigation(){
             })){
             dataStudent(navController,it.arguments?.getString("text"))
         }
-        composable(route =AppScreens.CargAcad.route){
-            cargaAcademica(navController)
+        composable(route =AppScreens.CargAcad.route+"{text}",
+            arguments = listOf(navArgument(name = "text"){
+                type = NavType.StringType
+            })
+        ){
+            cargaAcademica(navController, it.arguments?.getString("text"))
+        }
+
+        composable(route =AppScreens.CalFinal.route){
+            califFinales(navController)
+        }
+
+        composable(route =AppScreens.CalUnidad.route){
+            califUnidades(navController)
+        }
+        composable(route =AppScreens.Kardex.route){
+            Kardex(navController)
         }
 
     }

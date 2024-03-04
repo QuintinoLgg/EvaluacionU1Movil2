@@ -39,12 +39,17 @@ fun MenuGlobal(navController: NavController){
     )
 }
 
+@SuppressLint("SuspiciousIndentation")
 @Composable
 fun Botones(navController: NavController){
     val navControllerList: List<AppScreens> = listOf(
         AppScreens.Login,
         AppScreens.Info,
-        AppScreens.CargAcad
+        AppScreens.CargAcad,
+        AppScreens.Kardex,
+        AppScreens.CalUnidad,
+        AppScreens.CalFinal
+
     )
     val iconList: List<ImageVector> = listOf(
         Icons.Filled.ExitToApp,
