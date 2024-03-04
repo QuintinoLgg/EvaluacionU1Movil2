@@ -41,8 +41,11 @@ fun AppNavigation(){
             califFinales(navController)
         }
 
-        composable(route =AppScreens.CalUnidad.route){
-            califUnidades(navController)
+        composable(route =AppScreens.CalUnidad.route+"{text}",
+            arguments = listOf(navArgument(name = "text"){
+                type = NavType.StringType
+            })){
+            califUnidades(navController, it.arguments?.getString("text"))
         }
         composable(route =AppScreens.Kardex.route){
             Kardex(navController)
