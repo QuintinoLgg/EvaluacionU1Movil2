@@ -3,8 +3,8 @@ package com.example.autenticacionyconsulta.data
 
 import com.example.autenticacionyconsulta.modelos.CredencialesAlumno
 import com.example.autenticacionyconsulta.modelos.InformacionAlumno
-import com.example.autenticacionyconsulta.network.AlumnoApiService
-import com.example.autenticacionyconsulta.network.AlumnoInfoService
+import com.example.autenticacionyconsulta.network.repository.AlumnoApiService
+import com.example.autenticacionyconsulta.network.repository.AlumnoInfoService
 import com.google.gson.Gson
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.IOException

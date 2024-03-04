@@ -1,7 +1,7 @@
 package com.example.autenticacionyconsulta.data
 
-import com.example.autenticacionyconsulta.network.AlumnoApiService
-import com.example.autenticacionyconsulta.network.AlumnoInfoService
+import com.example.autenticacionyconsulta.network.repository.AlumnoApiService
+import com.example.autenticacionyconsulta.network.repository.AlumnoInfoService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
