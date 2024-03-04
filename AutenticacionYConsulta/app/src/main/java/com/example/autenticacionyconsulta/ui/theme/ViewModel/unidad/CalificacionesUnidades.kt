@@ -17,7 +17,7 @@ fun califUnidades(navController: NavController, text: String?
 ) {
     Scaffold(
         topBar = {
-            //navController.popBackStack()
+            //navController.popBackStack() Regresa a la ultima ventana abierta
             MenuGlobal(navController)
         },
     ) {
