@@ -25,7 +25,7 @@ interface AlumnosRepository {
     //Metodo suspend para la carga academica
     suspend fun obtenerCarga(): String
     //Metodo suspend para obtener calificaciones
-    suspend fun obtenerCalificaciones() : String
+    suspend fun obtenerCalificacionesUnidad() : String
 }
 
 // Implementación de AlumnosRepository para interactuar con servicios de red
@@ -127,7 +127,7 @@ class NetworkAlumnosRepository(
         }
     }
 
-    override suspend fun obtenerCalificaciones(): String {
+    override suspend fun obtenerCalificacionesUnidad(): String {
 
         val TAG = "REPOSITORY"
         val xml = """

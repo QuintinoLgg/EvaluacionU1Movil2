@@ -22,7 +22,10 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Newspaper
 import androidx.compose.material.icons.filled.Note
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.outlined.EditNote
 import androidx.compose.material.icons.outlined.HistoryEdu
+import androidx.compose.material.icons.outlined.HotelClass
+import androidx.compose.material.icons.outlined.Notes
 import androidx.compose.material.icons.outlined.Schedule
 import androidx.compose.material.icons.outlined.School
 import androidx.compose.material3.Button
@@ -104,7 +107,7 @@ fun MenuGlobal(
                     val scope = rememberCoroutineScope()
                     NavigationDrawerItem(
                         label = { Text("Carga Académica") },
-                        icon = { Icon(Icons.Outlined.Schedule, null) },
+                        icon = { Icon(Icons.Outlined.EditNote, null) },
                         selected = false,
                         onClick = {
                             scope.launch {
@@ -114,19 +117,18 @@ fun MenuGlobal(
                     )
                     NavigationDrawerItem(
                         label = { Text("Cardex") },
-                        icon = { Icon(Icons.Outlined.HistoryEdu, null) },
+                        icon = { Icon(Icons.Outlined.HotelClass, null) },
                         selected = false,
                         onClick = { navController.navigate(AppScreens.Kardex.route) }
                     )
                     NavigationDrawerItem(
                         label = { Text("Calificaciones por unidad") },
-                        icon = { Icon(Icons.Outlined.School, null) },
+                        icon = { Icon(Icons.Outlined.Notes, null) },
                         selected = false,
                         onClick = {
                             scope.launch {
-                                obtenerCalificaciones(viewModelAcademic, navController)
+                                obtenerCalificacionesPorUnidad(viewModelAcademic, navController)
                             }
-                            //navController.navigate(AppScreens.UnitsCalifScreen.route)
                         }
                     )
                     NavigationDrawerItem(
@@ -199,15 +201,15 @@ fun DialogCloseSesion() {
 suspend fun obtenerCargaAcademica(viewModel: ViewModelCargaAcademica, navController: NavController){
     val TAG = "HOME SCREEN"
     Log.d(TAG, "Invocando obtenerCargaAcademica")
-    var schedule = viewModel.getAcademicSchedule()
+    var schedule = viewModel.getCargaAcademica()
     var encodedInfo = Uri.encode(schedule)
     navController.navigate(AppScreens.CargAcad.route + encodedInfo)
 }
 
-suspend fun obtenerCalificaciones(viewModel: ViewModelCargaAcademica, navController: NavController){
+suspend fun obtenerCalificacionesPorUnidad(viewModel: ViewModelCargaAcademica, navController: NavController){
     val TAG = "HOME SCREEN"
     Log.d(TAG, "Invocando obtenerCalififcaciones")
-    var unidades = viewModel.getCalifByUnidad()
+    var unidades = viewModel.getCalifUnidad()
     var encodedInfo = Uri.encode(unidades)
     navController.navigate(AppScreens.CalUnidad.route + encodedInfo)
 }
