@@ -1,4 +1,4 @@
-package com.example.autenticacionyconsulta.ui.theme.ViewModel.cargaAcademica
+package com.example.autenticacionyconsulta.ui.theme.ViewModel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel

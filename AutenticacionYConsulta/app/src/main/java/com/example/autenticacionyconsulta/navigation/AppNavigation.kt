@@ -6,7 +6,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.autenticacionyconsulta.ui.theme.ViewModel.cargaAcademica.ViewModelCargaAcademica
 import com.example.autenticacionyconsulta.ui.theme.ViewModel.cargaAcademica.cargaAcademica
 import com.example.autenticacionyconsulta.ui.theme.ViewModel.final.califFinales
 import com.example.autenticacionyconsulta.ui.theme.ViewModel.kardex.Kardex

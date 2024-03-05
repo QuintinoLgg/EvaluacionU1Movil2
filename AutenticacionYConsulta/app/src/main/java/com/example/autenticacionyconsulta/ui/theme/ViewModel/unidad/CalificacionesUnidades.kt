@@ -9,8 +9,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import com.example.autenticacionyconsulta.modelos.CalificacionUnidad
-import com.example.autenticacionyconsulta.ui.theme.ViewModel.cargaAcademica.ViewModelCargaAcademica
-import com.example.autenticacionyconsulta.ui.theme.ViewModel.menuGlobal.MenuGlobal
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
