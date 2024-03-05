@@ -26,6 +26,9 @@ fun califUnidades(navController: NavController, text: String?
         val unidades: String
 
         LazyColumn {
+            item{
+                Text(text = "Calificaciones por unidades")
+            }
             item {
                 for (unidad in calificaciones) {
                     Column {

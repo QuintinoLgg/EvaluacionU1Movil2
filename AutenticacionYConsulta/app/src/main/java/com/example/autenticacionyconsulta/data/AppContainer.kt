@@ -4,6 +4,7 @@ import com.example.autenticacionyconsulta.network.repository.AlumnoApiService
 import com.example.autenticacionyconsulta.network.repository.AlumnoCalificacionesService
 import com.example.autenticacionyconsulta.network.repository.AlumnoCargaService
 import com.example.autenticacionyconsulta.network.repository.AlumnoInfoService
+import com.example.autenticacionyconsulta.network.repository.AlumnoKardexService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -52,13 +53,18 @@ class DefaultAppContainer : AppContainer {
         retrofit.create(AlumnoCalificacionesService::class.java)
     }
 
+    private val retrofitKardexConPromedioByAlumno: AlumnoKardexService by lazy {
+        retrofit.create(AlumnoKardexService::class.java)
+    }
+
     // Repositorio de alumnos que utiliza los servicios Retrofit
     override val alumnosRepository: AlumnosRepository by lazy {
         NetworkAlumnosRepository(
             retrofitService,
             retrofitServiceInfo,
             retrofitCargaAcademica,
-            retrofitCalificacionesPorUnidad
+            retrofitCalificacionesPorUnidad,
+            retrofitKardexConPromedioByAlumno
         )
     }
 }

@@ -29,6 +29,16 @@ class ViewModelCargaAcademica(private val alumnosRepository: AlumnosRepository):
         return schedule.await()
     }
 
+
+    suspend fun getKardexByAlumno(): String {
+        //val TAG = "VIEWMODEL"
+        //Log.d(TAG, "ENTRANDO AL VIEWMODEL")
+        val cardex = viewModelScope.async{
+            alumnosRepository.obtenerCardex()
+        }
+        return cardex.await()
+    }
+
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
