@@ -1,13 +1,18 @@
 package com.example.autenticacionyconsulta.data
 
 
+import android.util.Log
 import com.example.autenticacionyconsulta.modelos.CredencialesAlumno
 import com.example.autenticacionyconsulta.modelos.InformacionAlumno
 import com.example.autenticacionyconsulta.network.repository.AlumnoApiService
+import com.example.autenticacionyconsulta.network.repository.AlumnoCalificacionesService
+import com.example.autenticacionyconsulta.network.repository.AlumnoCargaService
 import com.example.autenticacionyconsulta.network.repository.AlumnoInfoService
 import com.google.gson.Gson
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.IOException
+import com.example.autenticacionyconsulta.modelos.CalificacionUnidad
+import com.example.autenticacionyconsulta.modelos.Carga
 
 
 // Definición de una interfaz llamada AlumnosRepository para la gestión de datos de alumnos
@@ -17,12 +22,18 @@ interface AlumnosRepository {
 
     // Método suspend para obtener información
     suspend fun getInfo():String
+    //Metodo suspend para la carga academica
+    suspend fun obtenerCarga(): String
+    //Metodo suspend para obtener calificaciones
+    suspend fun obtenerCalificaciones() : String
 }
 
 // Implementación de AlumnosRepository para interactuar con servicios de red
 class NetworkAlumnosRepository(
     private val alumnoApiService: AlumnoApiService,
-    private val alumnoInfoService: AlumnoInfoService
+    private val alumnoInfoService: AlumnoInfoService,
+    private val alumnoCargaService: AlumnoCargaService,
+    private val alumnoCalifUnidad: AlumnoCalificacionesService
 ): AlumnosRepository {
 
     // Implementación del método para obtener acceso
@@ -83,6 +94,69 @@ class NetworkAlumnosRepository(
                 ""
         }catch (e:IOException){
             ""
+        }
+    }
+
+    override suspend fun obtenerCarga(): String {
+        val TAG = "REPOSITORY"
+        val xml = """
+            <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+              <soap:Body>
+                <getCargaAcademicaByAlumno xmlns="http://tempuri.org/" />
+              </soap:Body>
+            </soap:Envelope>
+        """.trimIndent()
+        val requestBody = xml.toRequestBody()
+        try {
+            val respuestaInfo = alumnoCargaService.getCargaAcademica(requestBody).string().split("{","}")
+            if(respuestaInfo.size > 1){
+                val arreglo = mutableListOf<Carga>()
+                for(carga in respuestaInfo){
+                    if(carga.contains("Materia")){
+                        val objCarga = Gson().fromJson("{"+carga+"}", Carga::class.java)
+                        arreglo.add(objCarga)
+                    }
+                }
+                Log.d(TAG, arreglo.toString())
+                return ""+arreglo
+            } else
+                return ""
+            return ""
+        } catch (e: IOException){
+            return ""
+        }
+    }
+
+    override suspend fun obtenerCalificaciones(): String {
+
+        val TAG = "REPOSITORY"
+        val xml = """
+            <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+                <soap:Body>
+                    <getCalifUnidadesByAlumno xmlns="http://tempuri.org/" />
+                </soap:Body>
+            </soap:Envelope>
+        """.trimIndent()
+        val requestBody = xml.toRequestBody()
+        try {
+            val respuestaInfo = alumnoCalifUnidad.getCalificacionesUnidades(requestBody).string().split("{","}")
+            //Log.d("asdasd", respuestaInfo.toString())
+            if(respuestaInfo.size > 1){
+                val arreglo = mutableListOf<CalificacionUnidad>()
+                for(calificaciones in respuestaInfo){
+                    if(calificaciones.contains("Materia")){
+                        val objCalif = Gson().fromJson("{"+calificaciones+"}", CalificacionUnidad::class.java)
+                        Log.d("asdasd", objCalif.toString())
+                        arreglo.add(objCalif)
+                    }
+                }
+                //Log.d("asdasd", arreglo.toString())
+                return ""+arreglo
+            } else
+                return ""
+            return ""
+        } catch (e: IOException){
+            return ""
         }
     }
 }

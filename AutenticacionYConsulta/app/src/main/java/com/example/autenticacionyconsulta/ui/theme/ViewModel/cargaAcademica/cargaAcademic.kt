@@ -15,7 +15,7 @@ import com.example.autenticacionyconsulta.ui.theme.ViewModel.menuGlobal.MenuGlob
 fun cargaAcademica(navController: NavController, text: String?){
     Scaffold (
         topBar = {
-            MenuGlobal(navController)
+            //MenuGlobal(navController, viewModelCargaAcademica)
         }
     ){
             val carga = parseCargaList(text.toString())

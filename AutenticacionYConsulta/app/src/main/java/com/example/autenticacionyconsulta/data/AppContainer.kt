@@ -1,6 +1,8 @@
 package com.example.autenticacionyconsulta.data
 
 import com.example.autenticacionyconsulta.network.repository.AlumnoApiService
+import com.example.autenticacionyconsulta.network.repository.AlumnoCalificacionesService
+import com.example.autenticacionyconsulta.network.repository.AlumnoCargaService
 import com.example.autenticacionyconsulta.network.repository.AlumnoInfoService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -40,47 +42,60 @@ class DefaultAppContainer : AppContainer {
         retrofit.create(AlumnoInfoService::class.java)
     }
 
+    //Servicio retrofit para las llamadas de API de infromacion de carga academica
+    private val retrofitCargaAcademica : AlumnoCargaService by lazy {
+        retrofit.create(AlumnoCargaService::class.java)
+    }
+
+    //Servicio retrofit para las llamdas de API de informacion de calificacione por unidad
+    private val retrofitCalificacionesPorUnidad : AlumnoCalificacionesService by lazy {
+        retrofit.create(AlumnoCalificacionesService::class.java)
+    }
+
     // Repositorio de alumnos que utiliza los servicios Retrofit
     override val alumnosRepository: AlumnosRepository by lazy {
-        NetworkAlumnosRepository(retrofitService, retrofitServiceInfo)
+        NetworkAlumnosRepository(
+            retrofitService,
+            retrofitServiceInfo,
+            retrofitCargaAcademica,
+            retrofitCalificacionesPorUnidad
+        )
     }
 }
-
+//cookies
 // Interceptor para gestionar las cookies en las solicitudes HTTP
 class CookiesInterceptor : Interceptor {
-    // Variable que almacena las cookies
-    private var cookies: List<String> = emptyList()
+    // Map para guardar la cookie
+    private val cookies = mutableMapOf<String, String>()
 
-    // Método para establecer las cookies
-    fun setCookies(cookies: List<String>) {
-        this.cookies = cookies
-    }
-
-    // Intercepta las solicitudes HTTP
     override fun intercept(chain: Interceptor.Chain): Response {
         var request = chain.request()
 
-        // Agregar las cookies al encabezado de la solicitud
-        if (cookies.isNotEmpty()) {
-            val cookiesHeader = StringBuilder()
-            for (cookie in cookies) {
-                if (cookiesHeader.isNotEmpty()) {
-                    cookiesHeader.append("; ")
-                }
-                cookiesHeader.append(cookie)
+        // Agregar la cookie al encabezado de la solicitud
+        val cookiesHeader = StringBuilder()
+        for ((name, value) in cookies) {
+            if (cookiesHeader.isNotEmpty()) {
+                cookiesHeader.append("; ")
             }
+            cookiesHeader.append("$name=$value")
+        }
 
+        if (cookiesHeader.isNotEmpty()) {
             request = request.newBuilder()
                 .header("Cookie", cookiesHeader.toString())
                 .build()
         }
-
         val response = chain.proceed(request)
 
-        // Almacenar las cookies de la respuesta para futuras solicitudes
+        // Almacenar la cookiea para futuras solicitudes
         val receivedCookies = response.headers("Set-Cookie")
-        if (receivedCookies.isNotEmpty()) {
-            setCookies(receivedCookies)
+        for (cookie in receivedCookies) {
+            val parts = cookie.split(";")[0].split("=")
+            if (parts.size == 2) {
+                val name = parts[0]
+                val value = parts[1]
+                cookies[name] = value
+            }
         }
 
         return response

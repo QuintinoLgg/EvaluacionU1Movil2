@@ -16,7 +16,7 @@ interface AlumnoCalificacionesService {
 
     // POST para obtener la carga academica
     @POST("ws/wsalumnos.asmx")
-    suspend fun getcalificacionesUnidades(
+    suspend fun getCalificacionesUnidades(
         @Body requestBody: RequestBody
     ): ResponseBody
 

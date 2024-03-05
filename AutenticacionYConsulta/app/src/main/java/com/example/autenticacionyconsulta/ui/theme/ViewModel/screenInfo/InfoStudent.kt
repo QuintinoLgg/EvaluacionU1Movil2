@@ -35,9 +35,11 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.autenticacionyconsulta.R
 import com.example.autenticacionyconsulta.ui.theme.AutenticacionYConsultaTheme
+import com.example.autenticacionyconsulta.ui.theme.ViewModel.cargaAcademica.ViewModelCargaAcademica
 import com.example.autenticacionyconsulta.ui.theme.ViewModel.menuGlobal.MenuGlobal
 
 class InfoStudent : ComponentActivity() {
@@ -61,7 +63,8 @@ class InfoStudent : ComponentActivity() {
 @Composable
 fun dataStudent(
     navController: NavController,
-    text:String?
+    text:String?,
+    viewModelAcademic: ViewModelCargaAcademica = viewModel(factory = ViewModelCargaAcademica.Factory)
 ){
     val alumnoInfo=text?.split("(",")")?.get(1)?.split(",")
     Log.d("info",""+alumnoInfo)
@@ -70,7 +73,7 @@ fun dataStudent(
     Scaffold (
         topBar = {
             //navController.popBackStack()
-            MenuGlobal(navController)
+            MenuGlobal(navController, viewModelAcademic)
         },
     ){
         Column (
