@@ -51,6 +51,13 @@ fun Kardex(navController: NavController,
     ){
         LazyColumn{
             item {
+                Text(
+                    text = "Kardex",
+                    fontSize = MaterialTheme.typography.headlineMedium.fontSize,
+                    modifier = Modifier
+                        .padding(top = 10.dp)
+                )
+                Text(text = "")
                 Column {
                     if (prom != null) {
                         Text(text = "Prom. General: ${prom.PromedioGral}")

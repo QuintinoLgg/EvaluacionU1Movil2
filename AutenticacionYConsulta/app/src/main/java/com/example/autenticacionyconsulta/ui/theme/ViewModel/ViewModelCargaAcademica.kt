@@ -11,6 +11,14 @@ import com.example.autenticacionyconsulta.data.AlumnosRepository
 import kotlinx.coroutines.async
 
 class ViewModelCargaAcademica(private val alumnosRepository: AlumnosRepository): ViewModel() {
+    suspend fun getPerfil(): String {
+        val TAG = "VIEWMODEL"
+        Log.d(TAG, "ENTRANDO AL VIEWMODEL")
+        val schedule = viewModelScope.async{
+            alumnosRepository.getInfo()
+        }
+        return schedule.await()
+    }
     suspend fun getCargaAcademica(): String {
         val TAG = "VIEWMODEL"
         Log.d(TAG, "ENTRANDO AL VIEWMODEL")

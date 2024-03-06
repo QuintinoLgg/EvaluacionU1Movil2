@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.EditNote
 import androidx.compose.material.icons.outlined.HotelClass
 import androidx.compose.material.icons.outlined.Notes
@@ -92,6 +93,16 @@ fun MenuGlobal(
                     )
                     val scope = rememberCoroutineScope()
                     NavigationDrawerItem(
+                        label = { Text("Perfil") },
+                        icon = { Icon(Icons.Outlined.AccountCircle, null) },
+                        selected = false,
+                        onClick = {
+                            scope.launch {
+                                obtenerPerfil(viewModelAcademic, navController)
+                            }
+                        }
+                    )
+                    NavigationDrawerItem(
                         label = { Text("Carga Académica") },
                         icon = { Icon(Icons.Outlined.EditNote, null) },
                         selected = false,
@@ -102,7 +113,7 @@ fun MenuGlobal(
                         }
                     )
                     NavigationDrawerItem(
-                        label = { Text("Cardex") },
+                        label = { Text("Kardex") },
                         icon = { Icon(Icons.Outlined.HotelClass, null) },
                         selected = false,
                         onClick = {
@@ -190,6 +201,14 @@ fun DialogCloseSesion() {
             }
         }
     }
+}
+
+suspend fun obtenerPerfil(viewModel: ViewModelCargaAcademica, navController: NavController){
+    val TAG = "HOME SCREEN"
+    Log.d(TAG, "Invocando obtenerPerfil")
+    var schedule = viewModel.getPerfil()
+    var encodedInfo = Uri.encode(schedule)
+    navController.navigate(AppScreens.Info.route + encodedInfo)
 }
 
 suspend fun obtenerCargaAcademica(viewModel: ViewModelCargaAcademica, navController: NavController){

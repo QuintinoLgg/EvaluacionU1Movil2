@@ -2,38 +2,42 @@ package com.example.autenticacionyconsulta.ui.theme.ViewModel.unidad
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.autenticacionyconsulta.modelos.CalificacionUnidad
+import com.example.autenticacionyconsulta.ui.theme.ViewModel.ViewModelCargaAcademica
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun califUnidades(navController: NavController, text: String?
+fun califUnidades(navController: NavController, text: String?,
+                  viewModelAcademic: ViewModelCargaAcademica = viewModel(factory = ViewModelCargaAcademica.Factory)
 ) {
     Scaffold(
         topBar = {
-            //navController.popBackStack() Regresa a la ultima ventana abierta
-            // MenuGlobal(navController, viewModelCargaAcademica)
+            //navController.popBackStack()
+            //MenuGlobal(navController, viewModelCargaAcademica)
         },
     ) {
         val calificaciones = parseUnidadList(text.toString())
 
         LazyColumn {
             item {
+                Text(
+                    text = "Calificaciones",
+                    fontSize = MaterialTheme.typography.headlineMedium.fontSize,
+                    modifier = Modifier
+                        .padding(top = 10.dp)
+                )
+                Text(text = "")
                 Column {
                     for(calif in calificaciones){
                         Text("Materia:" + calif.Materia)
