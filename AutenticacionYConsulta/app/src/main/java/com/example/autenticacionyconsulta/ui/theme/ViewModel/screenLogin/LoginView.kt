@@ -1,5 +1,6 @@
 package com.example.autenticacionyconsulta.ui.theme.ViewModel.screenLogin
 
+import android.net.Uri
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -9,8 +10,10 @@ import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.AP
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
+import androidx.navigation.NavController
 import com.example.autenticacionyconsulta.AlumnosApplication
 import com.example.autenticacionyconsulta.data.AlumnosRepository
+import com.example.autenticacionyconsulta.navigation.AppScreens
 import kotlinx.coroutines.async
 
 class LoginView(private val alumnosRepository: AlumnosRepository):ViewModel(){
@@ -47,6 +50,7 @@ class LoginView(private val alumnosRepository: AlumnosRepository):ViewModel(){
         }
         return informacion.await()
     }
+
 
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {

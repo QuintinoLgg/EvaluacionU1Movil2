@@ -61,11 +61,20 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation(platform("androidx.compose:compose-bom:2023.08.00"))
     //EXTRAS
-    implementation("androidx.navigation:navigation-compose:2.7.7")
+    // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-simplexml:2.9.0")
-    implementation("com.squareup.okhttp3:okhttp:4.11.0")
-    implementation("androidx.compose.material:material-icons-extended:1.4.3")
+    // Retrofit with Scalar Converter
+    implementation("com.squareup.retrofit2:converter-scalars:2.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.3")
+    implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.retrofit2:converter-simplexml:2.1.0")
+    // NavController
+    implementation("androidx.navigation:navigation-compose:2.7.7")
+    // Icons
+    implementation("androidx.compose.material:material-icons-extended:1.6.2")
+    // Kotlin Serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
     //Fin de las EXTRAS
     implementation("org.simpleframework:simple-xml:2.7.1")
     implementation("com.google.code.gson:gson:2.8.8")
