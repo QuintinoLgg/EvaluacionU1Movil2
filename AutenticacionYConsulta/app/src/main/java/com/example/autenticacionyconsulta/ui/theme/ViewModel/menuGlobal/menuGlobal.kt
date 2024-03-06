@@ -46,6 +46,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.autenticacionyconsulta.navigation.AppScreens
 import com.example.autenticacionyconsulta.ui.theme.ViewModel.ViewModelCargaAcademica
+import com.example.autenticacionyconsulta.ui.theme.ViewModel.kardex.Kardex
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -104,7 +105,11 @@ fun MenuGlobal(
                         label = { Text("Cardex") },
                         icon = { Icon(Icons.Outlined.HotelClass, null) },
                         selected = false,
-                        onClick = { navController.navigate(AppScreens.Kardex.route) }
+                        onClick = {
+                            scope.launch {
+                                obtenerKardex(viewModelAcademic, navController)
+                            }
+                        }
                     )
                     NavigationDrawerItem(
                         label = { Text("Calificaciones por unidad") },
@@ -120,7 +125,11 @@ fun MenuGlobal(
                         label = { Text("Calificaciones finales") },
                         icon = { Icon(Icons.Outlined.School, null) },
                         selected = false,
-                        onClick = { navController.navigate(AppScreens.CalFinal.route) }
+                        onClick = {
+                            scope.launch {
+                                obtenerCalifFinales(viewModelAcademic, navController)
+                            }
+                        }
                     )
                 }
             }
@@ -197,4 +206,16 @@ suspend fun obtenerCalificacionesPorUnidad(viewModel: ViewModelCargaAcademica, n
     var unidades = viewModel.getCalifUnidad()
     var encodedInfo = Uri.encode(unidades)
     navController.navigate(AppScreens.CalUnidad.route + encodedInfo)
+}
+
+suspend fun obtenerCalifFinales(viewModel: ViewModelCargaAcademica, navController: NavController){
+    var unidades = viewModel.getCalifFinal()
+    var encodedInfo = Uri.encode(unidades)
+    navController.navigate(AppScreens.CalFinal.route + encodedInfo)
+}
+
+suspend fun obtenerKardex(viewModel: ViewModelCargaAcademica, navController: NavController){
+    var cardex = viewModel.getKardexByAlumno()
+    var encodedInfo = Uri.encode(cardex)
+    navController.navigate(AppScreens.Kardex.route + encodedInfo)
 }

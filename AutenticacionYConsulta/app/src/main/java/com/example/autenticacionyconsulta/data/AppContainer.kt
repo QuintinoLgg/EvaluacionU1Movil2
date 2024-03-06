@@ -54,6 +54,7 @@ class DefaultAppContainer : AppContainer {
         retrofit.create(AlumnoCalificacionesService::class.java)
     }
 
+    //Servicio retrofit para las llamdas de API de informacion de calificaciones finales
     private val retrofitCalificacionesFinales: AlumnoCalifFinalesService by lazy {
         retrofit.create(AlumnoCalifFinalesService::class.java)
     }

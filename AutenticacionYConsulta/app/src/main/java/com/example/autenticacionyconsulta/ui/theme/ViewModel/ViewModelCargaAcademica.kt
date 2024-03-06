@@ -29,6 +29,12 @@ class ViewModelCargaAcademica(private val alumnosRepository: AlumnosRepository):
         return schedule.await()
     }
 
+    suspend fun getCalifFinal(): String {
+        val grades = viewModelScope.async {
+            alumnosRepository.obtenerCalifFinales()
+        }
+        return grades.await()
+    }
 
     suspend fun getKardexByAlumno(): String {
         //val TAG = "VIEWMODEL"
