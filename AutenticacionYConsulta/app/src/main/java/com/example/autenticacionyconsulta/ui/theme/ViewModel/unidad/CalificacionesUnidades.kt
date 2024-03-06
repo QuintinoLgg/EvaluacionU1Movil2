@@ -50,6 +50,7 @@ fun califUnidades(navController: NavController, text: String?
                         if(!calif.C11.equals("null")) Text("Unidad 11: " + calif.C11)
                         if(!calif.C12.equals("null")) Text("Unidad 12: " + calif.C12)
                         if(!calif.C13.equals("null")) Text("Unidad 13: " + calif.C13)
+                        Text(text = "")
                     }
                 }
             }

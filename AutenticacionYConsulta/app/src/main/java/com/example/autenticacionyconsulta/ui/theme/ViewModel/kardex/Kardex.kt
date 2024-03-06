@@ -54,11 +54,13 @@ fun Kardex(navController: NavController,
                 Column {
                     if (prom != null) {
                         Text(text = "Prom. General: ${prom.PromedioGral}")
+                        Text(text = "")
                     }
                     for(materia in kardex){
                         Text(text = materia.Materia)
                         Text("Acreditación: " + materia.Acred)
                         Text(text = "Promedio: " + materia.Calif)
+                        Text(text = "")
                     }
                 }
             }

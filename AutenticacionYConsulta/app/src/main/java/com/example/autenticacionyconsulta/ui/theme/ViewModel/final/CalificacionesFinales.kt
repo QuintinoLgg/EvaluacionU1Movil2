@@ -28,6 +28,7 @@ fun califFinales(navController: NavController, text: String?){
                         if(calif.calif.equals("0")) Text("Sin calificación")
                         else Text("Calificacion: " + calif.calif)
                         Text("Acreditación: " + calif.acred)
+                        Text(text = "")
                     }
                 }
             }
