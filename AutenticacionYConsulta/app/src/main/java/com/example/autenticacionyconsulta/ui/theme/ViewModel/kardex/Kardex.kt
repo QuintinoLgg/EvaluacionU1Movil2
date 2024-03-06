@@ -43,8 +43,6 @@ fun Kardex(navController: NavController,
     val prom = parseCardexProm(obj[0])
     val kardex = parseCardexList(obj[1])
 
-    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-    val scope = rememberCoroutineScope()
     Scaffold (
         topBar = {
             //navController.popBackStack()
@@ -53,24 +51,15 @@ fun Kardex(navController: NavController,
     ){
         LazyColumn{
             item {
-                Spacer(modifier = Modifier.height(70.dp))
-            }
-            item {
-                if (prom != null) {
-                    Text(
-                        text = "Prom. General: ${prom.PromedioGral}",
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = 15.dp, top = 5.dp, end = 15.dp, bottom = 5.dp),
-                        textAlign = TextAlign.Center,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 18.sp,
-                    )
-                }
-            }
-            item {
-                for(materia in kardex){
-                    CardCardex(materia)
+                Column {
+                    if (prom != null) {
+                        Text(text = "Prom. General: ${prom.PromedioGral}")
+                    }
+                    for(materia in kardex){
+                        Text(text = materia.Materia)
+                        Text("Acreditación: " + materia.Acred)
+                        Text(text = "Promedio: " + materia.Calif)
+                    }
                 }
             }
         }
@@ -78,7 +67,7 @@ fun Kardex(navController: NavController,
 }
 
 fun parseCardexList(input: String): List<KardexClass> {
-    val cargaRegex = Regex("Cardex\\((.*?)\\)")
+    val cargaRegex = Regex("KardexClass\\((.*?)\\)")
 
     return cargaRegex
         .findAll(input)
@@ -109,7 +98,7 @@ fun parseCardexList(input: String): List<KardexClass> {
 }
 
 fun parseCardexProm(input: String): KardexPromClass? {
-    val cargaRegex = Regex("CardexProm\\((.*?)\\)")
+    val cargaRegex = Regex("KardexPromClass\\((.*?)\\)")
 
     return cargaRegex
         .find(input)
