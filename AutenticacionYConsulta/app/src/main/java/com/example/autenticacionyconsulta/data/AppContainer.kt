@@ -1,10 +1,7 @@
 package com.example.autenticacionyconsulta.data
 
 import com.example.autenticacionyconsulta.network.repository.AlumnoApiService
-<<<<<<< HEAD
 import com.example.autenticacionyconsulta.network.repository.AlumnoCalifFinalesService
-=======
->>>>>>> c392592ef8190c6db51e9cee34053dcd820cb38b
 import com.example.autenticacionyconsulta.network.repository.AlumnoCalificacionesService
 import com.example.autenticacionyconsulta.network.repository.AlumnoCargaService
 import com.example.autenticacionyconsulta.network.repository.AlumnoInfoService
@@ -57,13 +54,10 @@ class DefaultAppContainer : AppContainer {
         retrofit.create(AlumnoCalificacionesService::class.java)
     }
 
-<<<<<<< HEAD
     private val retrofitCalificacionesFinales: AlumnoCalifFinalesService by lazy {
         retrofit.create(AlumnoCalifFinalesService::class.java)
     }
 
-=======
->>>>>>> c392592ef8190c6db51e9cee34053dcd820cb38b
     private val retrofitKardexConPromedioByAlumno: AlumnoKardexService by lazy {
         retrofit.create(AlumnoKardexService::class.java)
     }
@@ -75,10 +69,7 @@ class DefaultAppContainer : AppContainer {
             retrofitServiceInfo,
             retrofitCargaAcademica,
             retrofitCalificacionesPorUnidad,
-<<<<<<< HEAD
             retrofitCalificacionesFinales,
-=======
->>>>>>> c392592ef8190c6db51e9cee34053dcd820cb38b
             retrofitKardexConPromedioByAlumno
         )
     }

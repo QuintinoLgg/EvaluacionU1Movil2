@@ -2,7 +2,6 @@ package com.example.autenticacionyconsulta.ui.theme.ViewModel.unidad
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
-<<<<<<< HEAD
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -21,16 +20,6 @@ import androidx.navigation.NavController
 import com.example.autenticacionyconsulta.modelos.CalificacionUnidad
 
 
-=======
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.navigation.NavController
-import com.example.autenticacionyconsulta.modelos.CalificacionUnidad
-
->>>>>>> c392592ef8190c6db51e9cee34053dcd820cb38b
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun califUnidades(navController: NavController, text: String?
@@ -38,10 +27,9 @@ fun califUnidades(navController: NavController, text: String?
     Scaffold(
         topBar = {
             //navController.popBackStack() Regresa a la ultima ventana abierta
-           // MenuGlobal(navController, viewModelCargaAcademica)
+            // MenuGlobal(navController, viewModelCargaAcademica)
         },
     ) {
-<<<<<<< HEAD
         val calificaciones = parseUnidadList(text.toString())
 
         LazyColumn {
@@ -62,26 +50,6 @@ fun califUnidades(navController: NavController, text: String?
                         if(!calif.C11.equals("null")) Text("Unidad 11: " + calif.C11)
                         if(!calif.C12.equals("null")) Text("Unidad 12: " + calif.C12)
                         if(!calif.C13.equals("null")) Text("Unidad 13: " + calif.C13)
-=======
-
-        val calificaciones = parseUnidadList(text.toString())
-
-        val unidades: String
-
-        LazyColumn {
-            item{
-                Text(text = "Calificaciones por unidades")
-            }
-            item {
-                for (unidad in calificaciones) {
-                    Column {
-                        Text(unidad.Materia)
-                        LazyRow {
-                            item {
-                                Text(text = unidad.concatenarC(unidad.UnidadesActivas.length))
-                            }
-                        }
->>>>>>> c392592ef8190c6db51e9cee34053dcd820cb38b
                     }
                 }
             }
@@ -90,11 +58,7 @@ fun califUnidades(navController: NavController, text: String?
 }
 
 fun parseUnidadList(input: String): List<CalificacionUnidad> {
-<<<<<<< HEAD
     val regex = Regex("CalificacionUnidad\\((.*?)\\)")
-=======
-    val regex = Regex("CalificacionByUnidad\\((.*?)\\)")
->>>>>>> c392592ef8190c6db51e9cee34053dcd820cb38b
 
     return regex
         .findAll(input)
@@ -126,7 +90,4 @@ fun parseUnidadList(input: String): List<CalificacionUnidad> {
         }.toList()
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> c392592ef8190c6db51e9cee34053dcd820cb38b

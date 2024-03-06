@@ -19,10 +19,6 @@ data class CalificacionUnidad (
     var Materia : String,
     var Grupo : String
 ) {
-<<<<<<< HEAD
-
-=======
->>>>>>> c392592ef8190c6db51e9cee34053dcd820cb38b
     fun concatenarC(hastaNumero: Int): String {
         val variablesC = (1..hastaNumero).map { "C$it" }
         return variablesC.joinToString(separator = ",") { getVariableCValue(it) }
