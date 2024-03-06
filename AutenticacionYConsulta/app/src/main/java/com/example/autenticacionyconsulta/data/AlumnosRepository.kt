@@ -2,7 +2,10 @@ package com.example.autenticacionyconsulta.data
 
 
 import android.util.Log
+<<<<<<< HEAD
 import com.example.autenticacionyconsulta.modelos.CalificacionFinal
+=======
+>>>>>>> c392592ef8190c6db51e9cee34053dcd820cb38b
 import com.example.autenticacionyconsulta.modelos.CredencialesAlumno
 import com.example.autenticacionyconsulta.modelos.InformacionAlumno
 import com.example.autenticacionyconsulta.network.repository.AlumnoApiService
@@ -16,7 +19,10 @@ import com.example.autenticacionyconsulta.modelos.CalificacionUnidad
 import com.example.autenticacionyconsulta.modelos.Carga
 import com.example.autenticacionyconsulta.modelos.KardexClass
 import com.example.autenticacionyconsulta.modelos.KardexPromClass
+<<<<<<< HEAD
 import com.example.autenticacionyconsulta.network.repository.AlumnoCalifFinalesService
+=======
+>>>>>>> c392592ef8190c6db51e9cee34053dcd820cb38b
 import com.example.autenticacionyconsulta.network.repository.AlumnoKardexService
 
 
@@ -32,8 +38,11 @@ interface AlumnosRepository {
     //Metodo suspend para obtener calificaciones
     suspend fun obtenerCalificacionesUnidad() : String
 
+<<<<<<< HEAD
     // Metodo suspend para obtener calificaciones finales
     suspend fun obtenerCalifFinales() : String
+=======
+>>>>>>> c392592ef8190c6db51e9cee34053dcd820cb38b
 
     suspend fun obtenerCardex() : String
 }
@@ -44,7 +53,10 @@ class NetworkAlumnosRepository(
     private val alumnoInfoService: AlumnoInfoService,
     private val alumnoCargaService: AlumnoCargaService,
     private val alumnoCalifUnidad: AlumnoCalificacionesService,
+<<<<<<< HEAD
     private val alumnoCalifFinal: AlumnoCalifFinalesService,
+=======
+>>>>>>> c392592ef8190c6db51e9cee34053dcd820cb38b
     private val alumnoCardex: AlumnoKardexService
 ): AlumnosRepository {
 
@@ -172,6 +184,7 @@ class NetworkAlumnosRepository(
         }
     }
 
+<<<<<<< HEAD
     override suspend fun obtenerCalifFinales(): String {
         val xml = """
             <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
@@ -205,6 +218,8 @@ class NetworkAlumnosRepository(
             return ""
         }
     }
+=======
+>>>>>>> c392592ef8190c6db51e9cee34053dcd820cb38b
 
     override suspend fun obtenerCardex(): String {
         val xml = """

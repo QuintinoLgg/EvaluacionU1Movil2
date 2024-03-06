@@ -37,11 +37,16 @@ fun AppNavigation(){
             cargaAcademica(navController, it.arguments?.getString("text"))
         }
 
+<<<<<<< HEAD
         composable(route =AppScreens.CalFinal.route+"{text}",
             arguments = listOf(navArgument(name = "text"){
                 type = NavType.StringType
             })){
             califFinales(navController, it.arguments?.getString("text"))
+=======
+        composable(route =AppScreens.CalFinal.route){
+            califFinales(navController)
+>>>>>>> c392592ef8190c6db51e9cee34053dcd820cb38b
         }
 
         composable(route =AppScreens.CalUnidad.route+"{text}",

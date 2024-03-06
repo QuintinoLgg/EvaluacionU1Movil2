@@ -1,6 +1,7 @@
 package com.example.autenticacionyconsulta.ui.theme.ViewModel.final
 
 import android.annotation.SuppressLint
+<<<<<<< HEAD
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Scaffold
@@ -13,12 +14,22 @@ import com.example.autenticacionyconsulta.ui.theme.ViewModel.unidad.parseUnidadL
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun califFinales(navController: NavController, text: String?){
+=======
+import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.Composable
+import androidx.navigation.NavController
+
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@Composable
+fun califFinales(navController: NavController){
+>>>>>>> c392592ef8190c6db51e9cee34053dcd820cb38b
     Scaffold (
         topBar = {
             //navController.popBackStack()
             //MenuGlobal(navController, viewModelCargaAcademica)
         },
     ){
+<<<<<<< HEAD
         val calificacionesFinales = parseCalifFinalList(text.toString())
 
         LazyColumn {
@@ -54,4 +65,8 @@ fun parseCalifFinalList(input: String): List<CalificacionFinal> {
                 califMap["Observaciones"] ?: ""
             )
         }.toList()
+=======
+
+    }
+>>>>>>> c392592ef8190c6db51e9cee34053dcd820cb38b
 }
