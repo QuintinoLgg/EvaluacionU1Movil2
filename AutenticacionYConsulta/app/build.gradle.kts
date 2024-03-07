@@ -75,6 +75,8 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended:1.6.2")
     // Kotlin Serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+    // WorkManager dependency
+    implementation("androidx.work:work-runtime-ktx:2.8.1")
     //Fin de las EXTRAS
     implementation("org.simpleframework:simple-xml:2.7.1")
     implementation("com.google.code.gson:gson:2.8.8")
