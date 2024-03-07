@@ -10,12 +10,19 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
@@ -32,6 +39,7 @@ import com.example.autenticacionyconsulta.modelos.KardexPromClass
 import com.example.autenticacionyconsulta.ui.theme.ViewModel.ViewModelCargaAcademica
 import com.example.autenticacionyconsulta.ui.theme.ViewModel.screenLogin.LoginView
 
+@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun Kardex(navController: NavController,
@@ -45,29 +53,65 @@ fun Kardex(navController: NavController,
 
     Scaffold (
         topBar = {
+            TopAppBar(title = { Text(
+                text = "Kardex",
+                fontSize = MaterialTheme.typography.headlineMedium.fontSize,
+                modifier = Modifier
+                    .padding(top = 10.dp)
+            ) },
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "")
+                    }
+                }
+            )
             //navController.popBackStack()
-           // MenuGlobal(navController,)
-        },
+            //MenuGlobal(navController, viewModelCargaAcademica)
+        }
     ){
         LazyColumn{
             item {
-                Text(
-                    text = "Kardex",
-                    fontSize = MaterialTheme.typography.headlineMedium.fontSize,
-                    modifier = Modifier
-                        .padding(top = 10.dp)
-                )
-                Text(text = "")
+
                 Column {
                     if (prom != null) {
-                        Text(text = "Prom. General: ${prom.PromedioGral}")
-                        Text(text = "")
+                        Card (
+                            colors = CardDefaults.cardColors(
+                                containerColor =  MaterialTheme.colorScheme.primaryContainer
+                            ),
+                            elevation = CardDefaults.cardElevation(
+                                defaultElevation = 6.dp
+                            ),/*
+                            onClick = {
+                                MinimalDialog()
+                            },*/
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(20.dp, top = 100.dp)
+                        ) {
+                            Text(text = "Prom. General: ${prom.PromedioGral}")
+                            Text(text = "")
+                        }
                     }
                     for(materia in kardex){
-                        Text(text = materia.Materia)
-                        Text("Acreditación: " + materia.Acred)
-                        Text(text = "Promedio: " + materia.Calif)
-                        Text(text = "")
+                        Card (
+                            colors = CardDefaults.cardColors(
+                                containerColor =  MaterialTheme.colorScheme.primaryContainer
+                            ),
+                            elevation = CardDefaults.cardElevation(
+                                defaultElevation = 6.dp
+                            ),/*
+                            onClick = {
+                                MinimalDialog()
+                            },*/
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(20.dp)
+                        ){
+                            Text(text = materia.Materia)
+                            Text("Acreditación: " + materia.Acred)
+                            Text(text = "Promedio: " + materia.Calif)
+                            Text(text = "")
+                        }
                     }
                 }
             }
