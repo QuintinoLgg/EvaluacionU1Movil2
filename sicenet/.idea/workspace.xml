@@ -16,7 +16,15 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="33b0565c-bdbf-4fb1-97fd-640295afceb1" name="Changes" comment="Ya no mas porfa" />
+    <list default="true" id="33b0565c-bdbf-4fb1-97fd-640295afceb1" name="Changes" comment="Ya no mas porfa">
+      <change afterPath="$PROJECT_DIR$/../AutenticacionYConsulta/app/src/main/java/com/example/autenticacionyconsulta/data/DAO.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AutenticacionYConsulta/app/src/main/java/com/example/autenticacionyconsulta/data/SICEbd.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AutenticacionYConsulta/app/src/main/java/com/example/autenticacionyconsulta/modelos/Entidades.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AutenticacionYConsulta/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../AutenticacionYConsulta/app/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AutenticacionYConsulta/app/src/main/java/com/example/autenticacionyconsulta/AlumnosApplication.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../AutenticacionYConsulta/app/src/main/java/com/example/autenticacionyconsulta/AlumnosApplication.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AutenticacionYConsulta/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../AutenticacionYConsulta/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -58,6 +66,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2cR4fK2GE1mQaEecvCST8vHLEJ4" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -148,9 +159,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
       <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
-      <method v="2">
-        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-      </method>
+      <method v="2" />
     </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
