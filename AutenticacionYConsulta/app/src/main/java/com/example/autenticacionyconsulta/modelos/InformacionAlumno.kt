@@ -6,7 +6,6 @@ data class InformacionAlumno (
     var adeudo:String="",
     var urlFoto:String="",
     var adeudoDescripcion:String="",
-    var inscrito:Boolean=false,
     var estatus:String="",
     var semActual:String="",
     var cdtosAcumulados:Int=0,
@@ -15,5 +14,6 @@ data class InformacionAlumno (
     var carrera:String="",
     var lineamiento:Int=0,
     var nombre:String="",
+    var inscrito:Boolean=false,
     var matricula:String="",
 )

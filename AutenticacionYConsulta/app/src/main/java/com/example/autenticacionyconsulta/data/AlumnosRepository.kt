@@ -1,6 +1,7 @@
 package com.example.autenticacionyconsulta.data
 
 import android.util.Log
+import androidx.lifecycle.ViewModel
 import com.example.autenticacionyconsulta.modelos.CalificacionFinal
 import com.example.autenticacionyconsulta.modelos.CredencialesAlumno
 import com.example.autenticacionyconsulta.modelos.InformacionAlumno
@@ -35,6 +36,23 @@ interface AlumnosRepository {
     suspend fun obtenerCalifFinales() : String
 
     suspend fun obtenerCardex() : String
+
+    // funciones del workmanager
+    fun autentication()
+    fun functions()
+    suspend fun getAccess(noControl: String, contrasenia: String): CredencialesAlumno
+    suspend fun obtenerInfo(matricula: String): InformacionAlumno
+
+    suspend fun obtenerCardex2(): List<KardexClass>
+    suspend fun obtenerCargaAcademica(): List<Carga>
+    suspend fun obtenerCalificacionFinal(): List<CalificacionFinal>
+    suspend fun obtenerCalificacionUnidad(): List<CalificacionUnidad>
+    suspend fun insertLogin(item: AlumnoDataObj)
+    suspend fun insertInfo(item: InfoAlumnoObj)
+    suspend fun insertMateria(item: MateriaAlumnoObj)
+    suspend fun insertCarga(item: CargaAlumnoObj)
+    suspend fun insertFinal(item: FinalAlumnoObj)
+    suspend fun insertUnidad(item: UnidadAlumnoObj)
 }
 
 // Implementación de AlumnosRepository para interactuar con servicios de red
@@ -242,4 +260,305 @@ class NetworkAlumnosRepository(
             return ""
         }
     }
+    override fun autentication() {
+        TODO("Not yet implemented")
+    }
+
+    override fun functions() {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getAccess(noControl: String, contrasenia: String): CredencialesAlumno {
+        TODO("Not yet implemented")
+    }
+    override suspend fun obtenerInfo(matricula: String): InformacionAlumno {
+        TODO("Not yet implemented")
+    }
+    override suspend fun obtenerCardex2(): List<KardexClass> {
+        TODO("Not yet implemented")
+    }
+    override suspend fun obtenerCargaAcademica(): List<Carga> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun obtenerCalificacionFinal(): List<CalificacionFinal> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun obtenerCalificacionUnidad(): List<CalificacionUnidad> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun insertLogin(item: AlumnoDataObj) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun insertInfo(item: InfoAlumnoObj) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun insertMateria(item: MateriaAlumnoObj) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun insertCarga(item: CargaAlumnoObj) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun insertFinal(item: FinalAlumnoObj) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun insertUnidad(item: UnidadAlumnoObj) {
+        TODO("Not yet implemented")
+    }
+}
+
+class Matricula: ViewModel(){
+    var matricula: String = ""
+}
+
+class OfflineAlumnosRepository(private val dao: AccesoDao): AlumnosRepository {
+    override suspend fun getAccess(noControl: String, contrasenia: String): CredencialesAlumno {
+        var aux = dao.getAccess(noControl).split("(", ")")
+        if (aux[1].isNotEmpty()) {
+
+            val result = CredencialesAlumno(
+                aux[1].split(",")[0].split("=")[1],
+                aux[1].split(",")[1].split("=")[1],
+                aux[1].split(",")[2].split("=")[1].toInt(),
+                aux[1].split(",")[3].split("=")[1],
+                aux[1].split(",")[4].split("=")[1]
+            )
+            if (result.contrasenia.equals(contrasenia)) {
+                return result
+            }
+        }
+        return CredencialesAlumno("", "",0, "", "")
+    }
+
+    override suspend fun getAccess(matricula: String, password: String, tipoUsuario: String): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getInfo(): String {
+        TODO("Not yet implemented")
+    }
+    override suspend fun obtenerCardex(): String {
+        TODO("Not yet implemented")
+    }
+    override suspend fun obtenerInfo(matricula: String): InformacionAlumno {
+        Log.d("Depuracion", matricula)
+        Log.d("Depuracion 2", dao.getInfo(matricula))
+        var aux = dao.getInfo(matricula).split("(", ")")
+
+        if (aux.isNotEmpty()) {
+            val result = InformacionAlumno(
+                aux[1].split(",")[0].split("=")[1],
+                aux[1].split(",")[1].split("=")[1],
+                aux[1].split(",")[2].split("=")[1],
+                aux[1].split(",")[3].split("=")[1],
+                aux[1].split(",")[4].split("=")[1],
+                aux[1].split(",")[5].split("=")[1],
+                aux[1].split(",")[6].split("=")[1],
+                aux[1].split(",")[7].split("=")[1].toInt(),
+                aux[1].split(",")[8].split("=")[1].toInt(),
+                aux[1].split(",")[9].split("=")[1],
+                aux[1].split(",")[10].split("=")[1],
+                aux[1].split(",")[11].split("=")[1].toInt(),
+                aux[1].split(",")[12].split("=")[1],
+                aux[1].split(",")[13].split("=")[1].toBoolean(),
+                aux[1].split(",")[14].split("=")[1]
+
+            )
+            return result
+        }
+        return InformacionAlumno("","","","","","","",0,0,)
+    }
+
+    override suspend fun obtenerCarga(): String {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun obtenerCalifFinales(): String {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun obtenerCalificacionesUnidad(): String {
+        TODO("Not yet implemented")
+    }
+
+    override fun autentication() {
+        TODO("Not yet implemented")
+    }
+
+    override fun functions() {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun obtenerCardex2(): List<KardexClass> {
+        try {
+            val respuesta = dao.getKardex(Matricula().matricula)
+                .split("[", "]")
+            var List: MutableList<KardexClass> = mutableListOf()
+
+            if (respuesta[1].isNotEmpty()) {
+                for (parte in respuesta[1].split("Materia(", ")")) {
+                    if (parte.contains("Materia")) {
+                        //Log.d("DIVISION",parte.split(",").toString())
+                        List.add(
+                            KardexClass(
+                                parte.split(",")[0].split("=")[1],
+                                parte.split(",")[1].split("=")[1],
+                                parte.split(",")[2].split("=")[1],
+                                parte.split(",")[3].split("=")[1],
+                                parte.split(",")[4].split("=")[1],
+                                parte.split(",")[5].split("=")[1],
+                                parte.split(",")[6].split("=")[1],
+                                parte.split(",")[7].split("=")[1],
+                                parte.split(",")[8].split("=")[1],
+                                parte.split(",")[9].split("=")[1],
+                                parte.split(",")[10].split("=")[1],
+                                parte.split(",")[11].split("=")[1],
+                                parte.split(",")[12].split("=")[1],
+                                parte.split(",")[13].split("=")[1],
+                                parte.split(",")[14].split("=")[1]
+                            )
+                        )
+                    }
+                }
+            } else {
+                return emptyList()
+            }
+            return List
+        } catch (e: IOException) {
+            Log.d("ERROR", e.toString())
+            return emptyList()
+        }
+    }
+
+    override suspend fun obtenerCargaAcademica(): List<Carga> {
+        try {
+            val respuesta = dao.getCargaAcademica(Matricula().matricula)
+                .split("[", "]")
+            var List: MutableList<Carga> = mutableListOf()
+
+            if (respuesta[1].isNotEmpty()) {
+                for (parte in respuesta[1].split("carga_academica(", ")")) {
+                    if (parte.contains("Materia")) {
+                        List.add(
+                            Carga(
+                                parte.split(",")[0].split("=")[1],
+                                parte.split(",")[1].split("=")[1],
+                                parte.split(",")[2].split("=")[1],
+                                parte.split(",")[3].split("=")[1],
+                                parte.split(",")[4].split("=")[1],
+                                parte.split(",")[5].split("=")[1],
+                                parte.split(",")[6].split("=")[1],
+                                parte.split(",")[7].split("=")[1],
+                                parte.split(",")[8].split("=")[1],
+                                parte.split(",")[9].split("=")[1],
+                                parte.split(",")[10].split("=")[1],
+                                parte.split(",")[11].split("=")[1],
+                                parte.split(",")[12].split("=")[1],
+                                parte.split(",")[13].split("=")[1]
+                            )
+                        )
+                    }
+                }
+            } else {
+                return emptyList()
+            }
+            return List
+        } catch (e: IOException) {
+            Log.d("ERROR", e.toString())
+            return emptyList()
+        }
+    }
+
+    override suspend fun obtenerCalificacionFinal(): List<CalificacionFinal> {
+        try {
+            val respuesta = dao.getCalificacionFinal(Matricula().matricula)
+                .split("[", "]")
+            var List: MutableList<CalificacionFinal> = mutableListOf()
+
+            if (respuesta[1].isNotEmpty()) {
+                for (parte in respuesta[1].split("final(", ")")) {
+                    if (parte.contains("materia")) {
+
+                        List.add(
+                            CalificacionFinal(
+                                parte.split(",")[0].split("=")[1],
+                                parte.split(",")[1].split("=")[1],
+                                parte.split(",")[2].split("=")[1],
+                                parte.split(",")[3].split("=")[1],
+                                parte.split(",")[4].split("=")[1]
+                            )
+                        )
+                    }
+                }
+            } else {
+                return emptyList()
+            }
+            return List
+        } catch (e: IOException) {
+            Log.d("ERROR", e.toString())
+            return emptyList()
+        }
+    }
+
+    override suspend fun obtenerCalificacionUnidad(): List<CalificacionUnidad> {
+        try {
+            val respuesta = dao.getCalificacionUnidad(Matricula().matricula)
+                .split("[", "]")
+            Log.d("PRE", respuesta.toString())
+            var List: MutableList<CalificacionUnidad> = mutableListOf()
+
+            if (respuesta[1].isNotEmpty()) {
+                for (parte in respuesta[1].split("Cal_Unidad(", ")")) {
+                    if (parte.contains("Materia")) {
+                        List.add(
+                            CalificacionUnidad(
+                                parte.split(",")[0].split("=")[1],
+                                parte.split(",")[1].split("=")[1],
+                                parte.split(",")[2].split("=")[1],
+                                parte.split(",")[3].split("=")[1],
+                                parte.split(",")[4].split("=")[1],
+                                parte.split(",")[5].split("=")[1],
+                                parte.split(",")[6].split("=")[1],
+                                parte.split(",")[7].split("=")[1],
+                                parte.split(",")[8].split("=")[1],
+                                parte.split(",")[9].split("=")[1],
+                                parte.split(",")[10].split("=")[1],
+                                parte.split(",")[11].split("=")[1],
+                                parte.split(",")[12].split("=")[1],
+                                parte.split(",")[13].split("=")[1],
+                                parte.split(",")[14].split("=")[1],
+                                parte.split(",")[15].split("=")[1],
+                                parte.split(",")[16].split("=")[1]
+                            )
+                        )
+                    }
+                }
+            } else {
+                return emptyList()
+            }
+            return List
+        } catch (e: IOException) {
+            Log.d("ERROR", e.toString())
+            return emptyList()
+        }
+
+    }
+    override suspend fun insertLogin(item: AlumnoDataObj) = dao.insertLogin(item)
+    override suspend fun insertInfo(item: InfoAlumnoObj) =dao.insertInfo(item)
+
+    override suspend fun insertMateria(item: MateriaAlumnoObj) = dao.insertMateria(item)
+
+    override suspend fun insertCarga(item: CargaAlumnoObj) = dao.insertCarga(item)
+
+    override suspend fun insertFinal(item: FinalAlumnoObj) = dao.insertFinal(item)
+
+    override suspend fun insertUnidad(item: UnidadAlumnoObj) = dao.insertUnidad(item)
+
 }

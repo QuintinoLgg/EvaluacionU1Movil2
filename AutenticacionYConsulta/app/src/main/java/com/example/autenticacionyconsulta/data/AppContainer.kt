@@ -1,5 +1,6 @@
 package com.example.autenticacionyconsulta.data
 
+import android.content.Context
 import com.example.autenticacionyconsulta.network.repository.AlumnoApiService
 import com.example.autenticacionyconsulta.network.repository.AlumnoCalifFinalesService
 import com.example.autenticacionyconsulta.network.repository.AlumnoCalificacionesService
@@ -15,10 +16,11 @@ import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 // Interfaz que define la estructura del contenedor de la aplicación
 interface AppContainer {
     val alumnosRepository: AlumnosRepository
+    val alumnosRepositoryOffline: AlumnosRepository
 }
 
 // Implementación predeterminada del contenedor de la aplicación
-class DefaultAppContainer : AppContainer {
+class DefaultAppContainer(private val context: Context): AppContainer {
     // URL base para las llamadas a la API
     private val BASE_URL = "https://sicenet.surguanajuato.tecnm.mx/"
 
@@ -73,6 +75,9 @@ class DefaultAppContainer : AppContainer {
             retrofitCalificacionesFinales,
             retrofitKardexConPromedioByAlumno
         )
+    }
+    override val alumnosRepositoryOffline: AlumnosRepository by lazy{
+        OfflineAlumnosRepository(SiceDB.getDatabase(context).itemDao())
     }
 }
 //cookies
