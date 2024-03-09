@@ -25,6 +25,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,8 +35,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.autenticacionyconsulta.data.FinalAlumnoObj
+import com.example.autenticacionyconsulta.data.MateriaAlumnoObj
+import com.example.autenticacionyconsulta.data.Variables
+import com.example.autenticacionyconsulta.data.fechaHoraActual
 import com.example.autenticacionyconsulta.modelos.KardexClass
 import com.example.autenticacionyconsulta.modelos.KardexPromClass
+import com.example.autenticacionyconsulta.ui.theme.ViewModel.OffLineViewModel
 import com.example.autenticacionyconsulta.ui.theme.ViewModel.ViewModelCargaAcademica
 import com.example.autenticacionyconsulta.ui.theme.ViewModel.screenLogin.LoginView
 
@@ -44,13 +50,18 @@ import com.example.autenticacionyconsulta.ui.theme.ViewModel.screenLogin.LoginVi
 @Composable
 fun Kardex(navController: NavController,
            text: String?,
-           viewModelAcademic: ViewModelCargaAcademica = viewModel(factory = ViewModelCargaAcademica.Factory),
-           viewModelLogin: LoginView = viewModel(factory = LoginView.Factory)
+           VW: ViewModelCargaAcademica = viewModel(factory = ViewModelCargaAcademica.Factory),
+           offlineViewModel: OffLineViewModel = viewModel(factory = OffLineViewModel.Factory)
 ){
     var obj = text.toString().split("/")
     val prom = parseCardexProm(obj[0])
     val kardex = parseCardexList(obj[1])
-
+    LaunchedEffect(key1 = Unit) {
+        offlineViewModel.insertKardex(
+            MateriaAlumnoObj(0,
+                Variables.matricula, fechaHoraActual().toString(),text.toString())
+        )
+    }
     Scaffold (
         topBar = {
             TopAppBar(title = { Text(

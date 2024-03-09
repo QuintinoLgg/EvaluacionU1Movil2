@@ -42,6 +42,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.autenticacionyconsulta.R
+import com.example.autenticacionyconsulta.data.Variables
 import com.example.autenticacionyconsulta.navigation.AppNavigation
 import com.example.autenticacionyconsulta.navigation.AppScreens
 import com.example.autenticacionyconsulta.ui.theme.AutenticacionYConsultaTheme
@@ -109,6 +110,7 @@ fun loginApp(
                 viewmodel.updateErrorLogin(false)
             },
             modifier = Modifier.fillMaxWidth()
+
         )
         Spacer(modifier = Modifier.height(25.dp))
         Row (
@@ -184,6 +186,7 @@ fun loginApp(
                        scope.launch {
                            if(viewmodel.getAccess(viewmodel.matricula,viewmodel.password,viewmodel.tipoUsuario)){
                                viewmodel.updateErrorLogin(false)
+                               Variables.matricula=viewmodel.matricula
                                var info=viewmodel.getInfo()
                                var encodedInfo = Uri.encode(info)
                                navController.navigate(route = AppScreens.Info.route+encodedInfo)

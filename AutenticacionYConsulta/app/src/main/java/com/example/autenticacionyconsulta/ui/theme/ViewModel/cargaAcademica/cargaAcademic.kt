@@ -17,16 +17,29 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.autenticacionyconsulta.data.CargaAlumnoObj
+import com.example.autenticacionyconsulta.data.Variables
+import com.example.autenticacionyconsulta.data.fechaHoraActual
 import com.example.autenticacionyconsulta.modelos.Carga
+import com.example.autenticacionyconsulta.ui.theme.ViewModel.OffLineViewModel
+import com.example.autenticacionyconsulta.ui.theme.ViewModel.ViewModelCargaAcademica
 import com.example.autenticacionyconsulta.ui.theme.ViewModel.menuGlobal.MenuGlobal
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun cargaAcademica(navController: NavController, text: String?){
+fun cargaAcademica(navController: NavController, text: String?,
+                   VW: ViewModelCargaAcademica = viewModel(factory = ViewModelCargaAcademica.Factory),
+                   offlineViewModel: OffLineViewModel = viewModel(factory = OffLineViewModel.Factory)
+){
+    LaunchedEffect(key1 = Unit) {
+        offlineViewModel.insertCarga(CargaAlumnoObj(0,Variables.matricula, fechaHoraActual().toString(),text.toString()))
+    }
     Scaffold (
         topBar = {
             TopAppBar(title = { Text(
