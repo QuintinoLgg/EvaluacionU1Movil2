@@ -6,58 +6,64 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.autenticacionyconsulta.ui.theme.ViewModel.cargaAcademica.cargaAcademica
-import com.example.autenticacionyconsulta.ui.theme.ViewModel.final.califFinales
-import com.example.autenticacionyconsulta.ui.theme.ViewModel.kardex.Kardex
-import com.example.autenticacionyconsulta.ui.theme.ViewModel.screenInfo.dataStudent
-import com.example.autenticacionyconsulta.ui.theme.ViewModel.screenLogin.loginApp
-import com.example.autenticacionyconsulta.ui.theme.ViewModel.unidad.califUnidades
+import com.example.autenticacionyconsulta.ui.theme.viewmodel.screens.student.AcademicScheduleScreen
+import com.example.autenticacionyconsulta.ui.theme.viewmodel.screens.student.CardexScreen
+import com.example.autenticacionyconsulta.ui.theme.viewmodel.screens.student.FinalsCalifScreen
+import com.example.autenticacionyconsulta.ui.theme.viewmodel.screens.student.HomeScreen
+import com.example.autenticacionyconsulta.ui.theme.viewmodel.screens.login.LoginScreen
+import com.example.autenticacionyconsulta.ui.theme.viewmodel.screens.student.UnitsCalifScreen
 
 @Composable
 fun AppNavigation(){
     val navController = rememberNavController()
-    NavHost(
-        navController = navController,
-        startDestination = AppScreens.Login.route,
-    ){
-        composable(route =AppScreens.Login.route){
-            loginApp(navController)
+    
+    NavHost(navController = navController, startDestination = AppScreens.LoginScreen.route){
+        composable(AppScreens.LoginScreen.route){
+            LoginScreen(navController)
         }
-        composable(route =AppScreens.Info.route+"{text}",
+
+        composable(
+            AppScreens.HomeScreen.route+"{text}",
             arguments = listOf(navArgument(name = "text"){
-                type= NavType.StringType
-            })){
-            dataStudent(navController,it.arguments?.getString("text"))
+                type = NavType.StringType
+            }
+        )){
+            HomeScreen(navController, it.arguments?.getString("text"))
         }
-        composable(route =AppScreens.CargAcad.route+"{text}",
+
+        composable(
+            AppScreens.AcademicScheduleScreen.route+"{text}",
             arguments = listOf(navArgument(name = "text"){
                 type = NavType.StringType
             })
         ){
-            cargaAcademica(navController, it.arguments?.getString("text"))
+            AcademicScheduleScreen(navController, it.arguments?.getString("text"))
         }
 
-        composable(route =AppScreens.CalUnidad.route+"{text}",
-            arguments = listOf(navArgument(name = "text"){
-                type = NavType.StringType
-            })){
-            califUnidades(navController, it.arguments?.getString("text"))
-        }
-
-        composable(route =AppScreens.CalFinal.route+"{text}",
-            arguments = listOf(navArgument(name = "text"){
-                type = NavType.StringType
-            })){
-            califFinales(navController, it.arguments?.getString("text"))
-        }
-
-        composable(AppScreens.Kardex.route+"{text}",
+        composable(
+            AppScreens.CardexScreen.route+"{text}",
             arguments = listOf(navArgument(name = "text"){
                 type = NavType.StringType
             })
         ){
-            Kardex(navController, it.arguments?.getString("text"))
+            CardexScreen(navController, it.arguments?.getString("text"))
         }
 
+        composable(
+            AppScreens.UnitsCalifScreen.route+"{text}",
+            arguments = listOf(navArgument(name = "text"){
+              type = NavType.StringType
+            })
+        ){
+            UnitsCalifScreen(navController, it.arguments?.getString("text"))
+        }
+
+        composable(AppScreens.FinalsCalifScreen.route+"{text}",
+            arguments = listOf(navArgument(name = "text"){
+                type = NavType.StringType
+            })
+        ){
+            FinalsCalifScreen(navController, it.arguments?.getString("text"))
+        }
     }
 }

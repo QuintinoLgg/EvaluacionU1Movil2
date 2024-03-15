@@ -3,43 +3,94 @@ package com.example.autenticacionyconsulta.data
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.autenticacionyconsulta.modelos.AccesoEntidades
+import com.example.autenticacionyconsulta.model.Acceso_Entity
+import com.example.autenticacionyconsulta.model.Alumno_Entity
+import com.example.autenticacionyconsulta.model.CalifFinal_Entity
+import com.example.autenticacionyconsulta.model.CalifUnidad_Entity
+import com.example.autenticacionyconsulta.model.CardexProm_Entity
+import com.example.autenticacionyconsulta.model.Cardex_Entity
+import com.example.autenticacionyconsulta.model.Carga_Entity
 
 @Dao
 interface AccesoDao {
     @Insert
-    fun insertLogin(item: AlumnoDataObj)
+    fun insertAcceso(item: Acceso_Entity)
 
+    @Query("SELECT * FROM acceso WHERE matricula=:mat AND contrasenia=:pass")
+   suspend fun getAccess(mat: String, pass: String): Acceso_Entity
+
+    @Query("DELETE FROM acceso")
+    suspend fun deleteAccesos()
+}
+
+@Dao
+interface AlumnoDao {
     @Insert
-    fun insertInfo(item: InfoAlumnoObj)
+    fun insertAlumno(item: Alumno_Entity)
 
+    @Query("SELECT * FROM alumno")
+    suspend fun getAlumno(): Alumno_Entity
+
+    @Query("DELETE FROM alumno")
+    suspend fun deleteAlumnos()
+}
+
+@Dao
+interface CargaDao {
     @Insert
-    fun insertMateria(item: MateriaAlumnoObj)
+    fun insertCarga(item: Carga_Entity)
 
+    @Query("SELECT * FROM carga")
+    suspend fun getCarga(): List<Carga_Entity>
+
+    @Query("DELETE FROM carga")
+    suspend fun deleteCargas()
+}
+
+@Dao
+interface CalifUnidadDao {
     @Insert
-    fun insertCarga(item: CargaAlumnoObj)
+    fun insertCalifUnidad(item: CalifUnidad_Entity)
 
+    @Query("SELECT * FROM califUnidad")
+    suspend fun getCalifsUnidad(): List<CalifUnidad_Entity>
+
+    @Query("DELETE FROM califUnidad")
+    suspend fun deleteUnidades()
+}
+
+@Dao
+interface CalifFinalDao {
     @Insert
-    fun insertFinal(item: FinalAlumnoObj)
+    fun insertCalifFinal(item: CalifFinal_Entity)
 
+    @Query("SELECT * FROM califFinal")
+    suspend fun getCalifsFinal(): List<CalifFinal_Entity>
+
+    @Query("DELETE FROM califFinal")
+    suspend fun deleteFinales()
+}
+
+@Dao
+interface CardexDao {
     @Insert
-    fun insertUnidad(item: UnidadAlumnoObj)
+    fun insertCardex(item: Cardex_Entity)
 
-    @Query("SELECT calUnidad FROM unidad WHERE matricula = :mt ORDER BY fecha DESC LIMIT 1")
-    fun getCalificacionUnidad(mt: String): String
+    @Query("SELECT * FROM cardex")
+    suspend fun getCardex(): List<Cardex_Entity>
 
-    @Query("SELECT final FROM final WHERE matricula = :mt ORDER BY fecha DESC LIMIT 1")
-    fun getCalificacionFinal(mt: String): String
+    @Query("DELETE FROM cardex")
+    suspend fun deleteCardex()
+}
 
-    @Query("SELECT cargaAcademica FROM carga WHERE matricula = :mt ORDER BY fecha DESC LIMIT 1")
-    fun getCargaAcademica(mt: String): String
+@Dao
+interface CardexPromDao {
+    @Insert
+    fun insertCardexProm(item: CardexProm_Entity)
 
-    @Query("SELECT materias FROM materias WHERE matricula = :mt ORDER BY fecha DESC LIMIT 1")
-    fun getKardex(mt: String): String
+    @Query("SELECT * FROM cardexProm")
+    suspend fun getCardexProm(): CardexProm_Entity
 
-    @Query("SELECT infoAlumno FROM info WHERE matricula = :mt ORDER BY fecha DESC LIMIT 1")
-    fun getInfo(mt: String): String
-
-    @Query("SELECT login FROM user WHERE matricula = :mt ORDER BY fecha ASC LIMIT 1")
-    fun getAccess(mt: String): String
+    @Query("DELETE FROM cardexProm")
+    suspend fun deleteCardexProm()
 }
