@@ -1,5 +1,5 @@
 package com.example.autenticacionyconsulta.ui.theme.viewmodel.screens.student
-//Comentario
+
 import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -100,7 +100,6 @@ fun AcademicScheduleScreen(
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
 
-    var dayList = listOf("Lun","Mar","Mie","Jue","Vie")
 
     ModalNavigationDrawer(
         drawerState = drawerState,
